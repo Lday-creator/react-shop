@@ -1,7 +1,10 @@
+import { useContext } from 'react';
+import { ShopContext } from '../context';
+
 import { useEffect } from 'react';
 
-function Alert(props) {
-    const { name = '', closeAlert = Function.prototype } = props;
+function Alert() {
+    const { alertName, closeAlert } = useContext(ShopContext);
 
     useEffect(() => {
         const timerId = setTimeout(closeAlert, 3000);
@@ -9,11 +12,12 @@ function Alert(props) {
         return () => {
             clearTimeout(timerId);
         };
-    }, [name]);
+        //eslint-disable-next-line
+    }, [alertName]);
 
     return (
         <div id='toast-container'>
-            <div className='toast'>{name} добавлен в корзину</div>
+            <div className='toast'>{alertName} добавлен в корзину</div>
         </div>
     );
 }
